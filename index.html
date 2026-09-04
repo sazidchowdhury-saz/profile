@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080808">
+<title>Sazid Uddin Chowdhury — Founder, SAZ Corporation</title>
+<meta name="description" content="Sazid Uddin Chowdhury — founder of SAZ Corporation, co-founder of Armani, and student at Chattogram Cantonment Public College.">
+
+<meta property="og:title" content="Sazid Uddin Chowdhury">
+<meta property="og:description" content="Founder of SAZ Corporation. Co-founder of Armani. Building from Chattogram.">
+<meta property="og:image" content="profile.png">
+<meta property="og:type" content="profile">
+
+<link rel="icon" href="saz-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- ══════════ LOADER ══════════ -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <img class="loader-mark" src="saz-mark.png" alt="" width="360" height="360">
+    <span class="loader-mono">SAZ CORPORATION</span>
+    <div class="loader-bar"><i id="loaderFill"></i></div>
+    <span class="loader-pct" id="loaderPct">0</span>
+  </div>
+</div>
+
+<!-- ══════════ AMBIENT LAYERS ══════════ -->
+<canvas id="dust" class="dust" aria-hidden="true"></canvas>
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ══════════ NAV ══════════ -->
+<header class="nav" id="nav">
+  <a class="nav-mark" href="#top">
+    <img class="nav-mark-badge" src="saz-mark.png" alt="SAZ Corporation" width="360" height="360">
+    <span class="nav-mark-name">Sazid Uddin Chowdhury</span>
+  </a>
+
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#about">About</a>
+    <a href="#ventures">Ventures</a>
+    <a href="#approach">Approach</a>
+    <a href="#path">Path</a>
+    <a href="#contact" class="nav-cta">Contact</a>
+  </nav>
+
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span><span></span>
+  </button>
+</header>
+
+<!-- ══════════ MOBILE MENU ══════════ -->
+<div class="sheet" id="mobileMenu" aria-hidden="true">
+  <nav class="sheet-links" aria-label="Mobile">
+    <a href="#about"><em>01</em>About</a>
+    <a href="#ventures"><em>02</em>Ventures</a>
+    <a href="#approach"><em>03</em>Approach</a>
+    <a href="#path"><em>04</em>Path</a>
+    <a href="#contact"><em>05</em>Contact</a>
+  </nav>
+  <div class="sheet-foot">
+    <a href="mailto:sazid@sazcorporation.com">sazid@sazcorporation.com</a>
+    <span>Chattogram, Bangladesh</span>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- ══════════ HERO ══════════ -->
+  <section class="hero">
+    <div class="hero-grid">
+
+      <div class="hero-copy">
+        <p class="status" data-anim="fade">
+          <span class="dot"></span> Available for partnerships · Chattogram, BD
+        </p>
+
+        <h1 class="hero-name">
+          <span class="line"><span data-anim="mask">Sazid</span></span>
+          <span class="line"><span data-anim="mask" data-delay="1">Uddin</span></span>
+          <span class="line outline"><span data-anim="mask" data-delay="2">Chowdhury</span></span>
+        </h1>
+
+        <p class="hero-role" data-anim="fade" data-delay="3">
+          <span class="rotator" id="rotator" aria-live="polite">Founder, SAZ Corporation</span>
+        </p>
+
+        <p class="hero-lede" data-anim="fade" data-delay="4">
+          Two companies, one college timetable, and a port city that taught me trade before
+          anyone taught me business.
+        </p>
+
+        <div class="hero-actions" data-anim="fade" data-delay="5">
+          <a class="btn btn-gold magnetic" href="#contact">Work with me</a>
+          <a class="btn btn-line magnetic" href="#ventures">See the ventures</a>
+        </div>
+      </div>
+
+      <!-- ── PROFILE PICTURE ── -->
+      <figure class="portrait" id="portrait" data-anim="rise" data-delay="2">
+        <div class="portrait-glow" aria-hidden="true"></div>
+        <div class="portrait-ring">
+          <div class="portrait-frame">
+            <img src="profile.png" alt="Portrait of Sazid Uddin Chowdhury" width="620" height="620">
+            <span class="portrait-scan" aria-hidden="true"></span>
+          </div>
+        </div>
+        <figcaption class="portrait-cap">
+          <b>Sazid Uddin Chowdhury</b>
+          <span>Founder &amp; student</span>
+        </figcaption>
+      </figure>
+
+    </div>
+
+    <a class="scroll-hint" href="#about" aria-label="Scroll to about">
+      <span class="scroll-hint-rail"><i></i></span> Scroll
+    </a>
+  </section>
+
+  <!-- ══════════ MARQUEE ══════════ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>SAZ Corporation ✦ Armani ✦ Chattogram ✦ Founder ✦ Operations ✦ Partnerships ✦ Sourcing ✦ Brand ✦</span>
+      <span>SAZ Corporation ✦ Armani ✦ Chattogram ✦ Founder ✦ Operations ✦ Partnerships ✦ Sourcing ✦ Brand ✦</span>
+    </div>
+  </div>
+
+  <!-- ══════════ ABOUT ══════════ -->
+  <section class="section" id="about">
+    <div class="shell split">
+      <aside class="col-head">
+        <span class="index">01</span>
+        <h2 class="h-sec" data-anim="rise">Short version</h2>
+        <p class="col-note">Who I am, without the padding</p>
+      </aside>
+
+      <div class="col-body">
+        <p class="lede" data-anim="rise">
+          I started building companies before finishing school, and I kept both going at once.
+          SAZ Corporation is the venture I founded and lead. Armani is the one I co-founded with a
+          partner. Between them I handle the parts most people avoid — pricing, suppliers, cash flow,
+          and the awkward conversations that decide whether a young business survives its first year.
+        </p>
+        <p class="lede" data-anim="rise" data-delay="1">
+          Chattogram is a port city, so trade is in the water here. That shapes how I work: margins
+          over noise, relationships over pitches, and something real shipped before anything is
+          announced.
+        </p>
+
+        <div class="tally">
+          <div data-anim="rise"><b class="count" data-to="2">0</b><span>Companies founded or co-founded</span></div>
+          <div data-anim="rise" data-delay="1"><b class="count" data-to="10" data-suffix="+">0</b><span>People I work with</span></div>
+          <div data-anim="rise" data-delay="2"><b class="nocount">CCPC</b><span>Chattogram Cantonment Public College</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ VENTURES ══════════ -->
+  <section class="section" id="ventures">
+    <div class="shell split">
+      <aside class="col-head">
+        <span class="index">02</span>
+        <h2 class="h-sec" data-anim="rise">Ventures</h2>
+        <p class="col-note">What I own and operate</p>
+      </aside>
+
+      <div class="col-body">
+
+        <article class="venture" data-anim="rise">
+          <div class="venture-bar" aria-hidden="true"></div>
+          <a class="venture-logo" href="#contact" aria-label="SAZ Corporation">
+            <img src="saz-logo.png" alt="SAZ Corporation logo" width="875" height="670" loading="lazy">
+          </a>
+          <div class="venture-head">
+            <h3>SAZ Corporation</h3>
+            <span class="tag">Founder</span>
+          </div>
+          <p>
+            The company I started and still run. SAZ Corporation was built to take one idea and make
+            it commercially sound — sourcing, operations, and customers handled in-house rather than
+            handed to people with no stake in the outcome.
+          </p>
+          <ul class="chips">
+            <li>Founded &amp; led</li><li>Operations</li><li>Strategy</li><li>Chattogram</li>
+          </ul>
+        </article>
+
+        <article class="venture" data-anim="rise" data-delay="1">
+          <div class="venture-bar" aria-hidden="true"></div>
+          <div class="venture-head">
+            <h3>Armani</h3>
+            <span class="tag tag-alt">Co-founder</span>
+          </div>
+          <p>
+            A venture built with a co-founder, splitting the work between product and growth. My side
+            of the table covers partnerships, positioning, and keeping the numbers honest as the
+            business moves past its first customers.
+          </p>
+          <ul class="chips">
+            <li>Co-founded</li><li>Growth</li><li>Partnerships</li><li>Brand</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ APPROACH ══════════ -->
+  <section class="section band" id="approach">
+    <div class="shell split">
+      <aside class="col-head">
+        <span class="index">03</span>
+        <h2 class="h-sec" data-anim="rise">How I work</h2>
+        <p class="col-note">Four rules I actually follow</p>
+      </aside>
+
+      <div class="col-body">
+        <p class="lede" data-anim="rise">Every venture gets tested against these before it gets my time.</p>
+
+        <div class="rules">
+          <div class="rule" data-anim="rise">
+            <h4>Sell it before you build it</h4>
+            <p>If nobody will pay for the idea in conversation, they will not pay for it in a shop.</p>
+          </div>
+          <div class="rule" data-anim="rise" data-delay="1">
+            <h4>Own the supply chain</h4>
+            <p>Margins die in the middle. I keep sourcing close and relationships direct.</p>
+          </div>
+          <div class="rule" data-anim="rise" data-delay="2">
+            <h4>Small team, clear roles</h4>
+            <p>A few people who know exactly what they own beats a crowd waiting on instructions.</p>
+          </div>
+          <div class="rule" data-anim="rise" data-delay="3">
+            <h4>Study, then ship</h4>
+            <p>College is not on pause. Discipline moves between the two in both directions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ PATH ══════════ -->
+  <section class="section" id="path">
+    <div class="shell split">
+      <aside class="col-head">
+        <span class="index">04</span>
+        <h2 class="h-sec" data-anim="rise">Path so far</h2>
+        <p class="col-note">Education and milestones, in order</p>
+      </aside>
+
+      <div class="col-body">
+        <ol class="track">
+          <li data-anim="rise">
+            <span class="track-year">Now</span>
+            <div>
+              <h4>Chattogram Cantonment Public College</h4>
+              <p>Studying while running both companies. Balancing coursework with a business day is
+                 the constraint that made me good at scheduling.</p>
+            </div>
+          </li>
+          <li data-anim="rise" data-delay="1">
+            <span class="track-year">Ongoing</span>
+            <div>
+              <h4>Co-founder — Armani</h4>
+              <p>Joined a partner to launch and grow a second venture alongside SAZ Corporation.</p>
+            </div>
+          </li>
+          <li data-anim="rise" data-delay="2">
+            <span class="track-year">Founding</span>
+            <div>
+              <h4>Founder — SAZ Corporation</h4>
+              <p>Started the company from an idea and a small amount of capital, and took it to
+                 paying customers.</p>
+            </div>
+          </li>
+          <li data-anim="rise" data-delay="3">
+            <span class="track-year">Before</span>
+            <div>
+              <h4>First attempts</h4>
+              <p>Small trading and reselling experiments that taught me pricing, negotiation, and
+                 what a bad supplier really costs.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ CONTACT ══════════ -->
+  <section class="section" id="contact">
+    <div class="shell split">
+      <aside class="col-head">
+        <span class="index">05</span>
+        <h2 class="h-sec" data-anim="rise">Get in touch</h2>
+        <p class="col-note">Partnerships, suppliers, press</p>
+      </aside>
+
+      <div class="col-body">
+        <p class="contact-line" data-anim="rise">
+          If you are building something in Chattogram, I want to hear about it.
+        </p>
+
+        <ul class="channels">
+          <li data-anim="rise"><span>Email</span><a href="mailto:sazid@sazcorporation.com">sazid@sazcorporation.com</a></li>
+          <li data-anim="rise" data-delay="1"><span>Phone</span><a href="tel:+8801000000000">+880 1000 000000</a></li>
+          <li data-anim="rise" data-delay="2"><span>LinkedIn</span><a href="#" rel="me noopener">linkedin.com/in/yourhandle</a></li>
+          <li data-anim="rise" data-delay="3"><span>Instagram</span><a href="#" rel="me noopener">@yourhandle</a></li>
+          <li data-anim="rise" data-delay="4"><span>WhatsApp</span><a href="https://wa.me/8801000000000" rel="noopener">Message directly</a></li>
+        </ul>
+
+        <a class="btn btn-gold btn-wide magnetic" href="mailto:sazid@sazcorporation.com" data-anim="rise">Send an email</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell foot-in">
+    <span>© <span id="year">2026</span> Sazid Uddin Chowdhury</span>
+    <span>SAZ Corporation · Armani</span>
+    <a href="#top" class="to-top">Back to top</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
