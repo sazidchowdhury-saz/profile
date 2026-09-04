@@ -49,6 +49,9 @@ html{-webkit-text-size-adjust:100%}
 body{
   margin:0;
   background:var(--void);
+  -webkit-tap-highlight-color:transparent;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
   color:var(--bone);
   font-family:var(--text);
   font-size:16px;
@@ -62,9 +65,10 @@ h1,h2,h3,h4{margin:0;font-family:var(--display);font-weight:700;letter-spacing:-
 a{color:inherit;text-decoration:none}
 button{font:inherit;border:0;background:none;color:inherit;cursor:pointer}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
-body.locked{overflow:hidden}
+body.locked{position:fixed;inset-inline:0;width:100%;overflow:hidden;overscroll-behavior:none}
 
-.shell{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--pad)}
+.shell{width:100%;max-width:var(--max);margin-inline:auto;
+  padding-inline:max(var(--pad),env(safe-area-inset-left)) max(var(--pad),env(safe-area-inset-right))}
 
 /* ---------- 3. loader ---------- */
 .loader{
@@ -114,12 +118,13 @@ body.locked{overflow:hidden}
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:110;
   display:flex;align-items:center;justify-content:space-between;gap:16px;
-  padding:14px var(--pad);
+  padding:calc(14px + env(safe-area-inset-top)) max(var(--pad),env(safe-area-inset-right)) 14px max(var(--pad),env(safe-area-inset-left));
   transition:background .4s var(--ease), border-color .4s, padding .4s var(--ease);
   border-bottom:1px solid transparent;
 }
 .nav.stuck{
   background:rgba(7,7,7,.82);
+  -webkit-backdrop-filter:blur(14px);
   backdrop-filter:blur(14px);
   border-bottom-color:rgba(212,175,55,.16);
 }
@@ -146,7 +151,9 @@ body.locked{overflow:hidden}
   position:fixed;inset:0;z-index:105;
   background:linear-gradient(180deg,var(--coal),var(--void));
   display:flex;flex-direction:column;justify-content:center;gap:40px;
-  padding:96px var(--pad) 40px;
+  height:100vh;height:100dvh;overflow-y:auto;overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  padding:calc(88px + env(safe-area-inset-top)) max(var(--pad),env(safe-area-inset-right)) calc(40px + env(safe-area-inset-bottom)) max(var(--pad),env(safe-area-inset-left));
   clip-path:circle(0% at calc(100% - 42px) 36px);
   transition:clip-path .6s var(--ease);
   visibility:hidden;
@@ -175,7 +182,7 @@ body.locked{overflow:hidden}
   position:relative;z-index:1;
   min-height:100svh;
   display:flex;flex-direction:column;justify-content:flex-start;
-  padding:132px var(--pad) 64px;
+  padding:calc(124px + env(safe-area-inset-top)) max(var(--pad),env(safe-area-inset-right)) 64px max(var(--pad),env(safe-area-inset-left));
   max-width:var(--max);margin-inline:auto;
 }
 .hero::before{
@@ -194,7 +201,7 @@ body.locked{overflow:hidden}
   box-shadow:0 0 0 0 rgba(212,175,55,.6);animation:ping 2.4s ease-out infinite}
 @keyframes ping{70%{box-shadow:0 0 0 11px rgba(212,175,55,0)}100%{box-shadow:0 0 0 0 rgba(212,175,55,0)}}
 
-.hero-name{font-size:clamp(2.6rem,14vw,6.6rem);line-height:.88;letter-spacing:-.045em;
+.hero-name{font-size:clamp(2.3rem,13vw,6.6rem);line-height:.88;letter-spacing:-.045em;
   overflow-wrap:break-word;hyphens:none}
 .hero-name .line{display:block;overflow:hidden;max-width:100%}
 .hero-name .line > span{display:block}
@@ -400,7 +407,8 @@ body.locked{overflow:hidden}
 .channels a:hover{background-size:100% 1px;background-position:0 100%}
 
 /* ---------- 11. footer ---------- */
-.foot{position:relative;z-index:1;background:var(--coal);padding-block:26px;font-size:.78rem;color:var(--mute)}
+.foot{position:relative;z-index:1;background:var(--coal);font-size:.78rem;color:var(--mute);
+  padding:26px 0 calc(26px + env(safe-area-inset-bottom))}
 .foot-in{display:flex;flex-direction:column;gap:10px}
 .to-top{color:var(--gold);font-weight:600}
 
@@ -427,6 +435,78 @@ body.locked{overflow:hidden}
 [data-delay="3"].in { transition-delay: .36s; }
 [data-delay="4"].in { transition-delay: .48s; }
 [data-delay="5"].in { transition-delay: .60s; }
+
+/* ---------- 12b. mobile refinements ---------- */
+/* anchor jumps clear the fixed nav */
+[id]{scroll-margin-top:calc(84px + env(safe-area-inset-top))}
+
+/* touch feedback replaces hover on phones */
+a,button{-webkit-tap-highlight-color:transparent}
+.btn{touch-action:manipulation}
+.btn:active{transform:scale(.97)}
+.burger:active{background:rgba(212,175,55,.12)}
+.channels a:active,.sheet-links a:active,.to-top:active{opacity:.65}
+.venture-logo:active img{transform:scale(1.02)}
+
+/* hover styles stick after a tap on touch screens - neutralise them */
+@media (hover:none){
+  .nav-mark:hover .nav-mark-badge{transform:none;box-shadow:none}
+  .btn-gold:hover{box-shadow:0 8px 30px -12px rgba(212,175,55,.8)}
+  .btn-line:hover{background:transparent}
+  .venture-logo:hover img{transform:none}
+  .rule:hover{background:var(--void)}
+  .channels a:hover{background-size:0% 1px;background-position:100% 100%}
+  .portrait-frame:hover{box-shadow:
+    0 0 0 8px rgba(212,175,55,.07),
+    0 0 46px -6px rgba(212,175,55,.45),
+    0 30px 60px -28px rgba(0,0,0,.95)}
+  .portrait-frame:hover img,.portrait-frame:focus-within img{transform:none}
+}
+
+/* comfortable tap targets (44px min) */
+.channels li{min-height:56px}
+.sheet-links a{padding:12px 0}
+.to-top{display:inline-flex;align-items:center;min-height:44px}
+.foot-in a{padding-block:4px}
+
+/* wider phones: iPhone 14/15/16/17 Plus & Pro Max, Galaxy S Ultra */
+@media (min-width:430px) and (max-width:679px){
+  :root{--pad:24px}
+  .tally{grid-template-columns:repeat(2,1fr);gap:24px}
+  .hero-lede{font-size:1.02rem}
+}
+
+/* compact phones: iPhone 12/13 mini, Pixel a-series, Galaxy A */
+@media (max-width:400px){
+  :root{--pad:18px}
+  .hero{padding-top:calc(114px + env(safe-area-inset-top))}
+  .hero-lede{font-size:.95rem}
+  .hero-actions{gap:10px}
+  .btn{padding-inline:22px;font-size:.84rem}
+  .tally b{font-size:2rem}
+  .rule{padding:20px 16px}
+  .marquee-track span{padding-right:26px;font-size:.92rem}
+  .channels li{flex-direction:column;align-items:flex-start;gap:4px;padding:14px 0}
+  .channels a{text-align:left}
+  .sheet-links a{font-size:clamp(1.7rem,9.5vw,2.2rem)}
+}
+
+/* phone held sideways */
+@media (orientation:landscape) and (max-height:540px){
+  .hero{min-height:auto;padding-top:calc(94px + env(safe-area-inset-top));padding-bottom:48px}
+  .hero-grid{grid-template-columns:minmax(0,1fr) clamp(140px,24vw,210px);align-items:center;gap:28px}
+  .hero-copy{min-width:0}
+  .portrait{width:100%;max-width:210px;margin:0;justify-self:end}
+  .scroll-hint{margin-top:26px}
+  .section{padding-block:48px}
+  .sheet{justify-content:flex-start;gap:24px;padding-top:calc(72px + env(safe-area-inset-top))}
+  .sheet-links a{font-size:1.45rem;padding:8px 0}
+}
+
+/* save battery when the phone is in low-power / data-saver mode */
+@media (prefers-reduced-data:reduce){
+  .dust,.portrait-scan{display:none}
+}
 
 /* ---------- 13. tablet ---------- */
 @media (min-width:680px){
@@ -813,6 +893,21 @@ html{scroll-behavior:smooth}
   const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
   const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const desktop = () => window.matchMedia('(min-width: 1000px)').matches;
+  const phone = () => window.matchMedia('(max-width: 699px)').matches;
+
+  /* iOS ignores overflow:hidden on body, so pin the page and restore scroll */
+  let lockY = 0;
+  function lockScroll(on) {
+    if (on) {
+      lockY = window.scrollY || window.pageYOffset || 0;
+      document.body.style.top = -lockY + 'px';
+      document.body.classList.add('locked');
+    } else {
+      document.body.classList.remove('locked');
+      document.body.style.top = '';
+      window.scrollTo(0, lockY);
+    }
+  }
 
   /* ---------- 1. year ---------- */
   const yr = $('#year');
@@ -825,12 +920,12 @@ html{scroll-behavior:smooth}
 
   function finishLoad() {
     if (loader) loader.classList.add('done');
-    document.body.classList.remove('locked');
+    lockScroll(false);
     playHero();
   }
 
   if (loader && !calm) {
-    document.body.classList.add('locked');
+    lockScroll(true);
     let n = 0;
     const tick = setInterval(() => {
       n = Math.min(100, n + Math.random() * 18);
@@ -909,7 +1004,7 @@ html{scroll-behavior:smooth}
     burger.setAttribute('aria-expanded', String(open));
     burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     sheet.setAttribute('aria-hidden', String(!open));
-    document.body.classList.toggle('locked', open);
+    lockScroll(open);
   }
 
   if (burger) burger.addEventListener('click', () => setMenu(!burger.classList.contains('open')));
@@ -1024,7 +1119,9 @@ html{scroll-behavior:smooth}
 
     function seed() {
       const area = window.innerWidth * window.innerHeight;
-      const count = Math.min(70, Math.round(area / 24000));
+      const small = window.innerWidth < 700;
+      const cap = small ? 26 : 70;
+      const count = Math.min(cap, Math.round(area / (small ? 30000 : 24000)));
       dots = Array.from({ length: count }, () => ({
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
@@ -1052,7 +1149,16 @@ html{scroll-behavior:smooth}
 
     size();
     frame();
-    window.addEventListener('resize', size);
+
+    /* On phones the address bar collapsing fires resize constantly and only
+       changes the height - re-seeding on every one of those causes jank. */
+    let lastW = window.innerWidth, rt;
+    window.addEventListener('resize', () => {
+      if (Math.abs(window.innerWidth - lastW) < 2) return;
+      lastW = window.innerWidth;
+      clearTimeout(rt);
+      rt = setTimeout(size, 180);
+    }, { passive: true });
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) cancelAnimationFrame(raf);
       else raf = requestAnimationFrame(frame);
