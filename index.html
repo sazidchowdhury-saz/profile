@@ -69,29 +69,37 @@ body.locked{overflow:hidden}
 /* ---------- 3. loader ---------- */
 .loader{
   position:fixed;inset:0;z-index:200;
+  width:100%;height:100vh;height:100dvh;
   background:var(--void);
-  display:grid;place-content:center;justify-items:center;gap:18px;
+  display:flex;align-items:center;justify-content:center;
+  padding:24px max(20px,env(safe-area-inset-right)) 24px max(20px,env(safe-area-inset-left));
   transition:opacity .6s var(--ease), visibility .6s;
 }
-.loader.done{opacity:0;visibility:hidden}
-.loader-inner{display:grid;justify-items:center;gap:16px}
+.loader.done{opacity:0;visibility:hidden;pointer-events:none}
+.loader-inner{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:16px;width:100%;max-width:min(86vw,320px);text-align:center;
+}
 .loader-mark{
-  width:74px;height:74px;border-radius:50%;
+  width:clamp(88px,24vw,116px);aspect-ratio:1;height:auto;
+  border-radius:50%;object-fit:contain;padding:6px;
+  background:var(--void);
   animation:markIn 1.4s var(--ease) both, float 3.6s ease-in-out 1.4s infinite;
   box-shadow:0 0 44px -6px rgba(212,175,55,.55);
 }
 @keyframes markIn{from{opacity:0;transform:scale(.7) rotate(-25deg)}to{opacity:1;transform:none}}
-@keyframes float{50%{transform:translateY(-7px)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 .loader-mono{
   font-family:var(--display);font-weight:700;font-size:.78rem;letter-spacing:.34em;
+  text-indent:.34em;
   background:linear-gradient(100deg,var(--gold-dim),var(--gold-hi),var(--gold-dim));
   background-size:220% 100%;
   -webkit-background-clip:text;background-clip:text;color:transparent;
   animation:sweep 2s linear infinite;
 }
-.loader-bar{width:min(56vw,220px);height:2px;background:rgba(212,175,55,.18);overflow:hidden}
+.loader-bar{width:100%;max-width:220px;height:2px;background:rgba(212,175,55,.18);overflow:hidden}
 .loader-bar i{display:block;height:100%;width:0;background:var(--gold)}
-.loader-pct{font-size:.72rem;letter-spacing:.24em;color:var(--gold-dim)}
+.loader-pct{font-size:.72rem;letter-spacing:.24em;text-indent:.24em;color:var(--gold-dim)}
 @keyframes sweep{to{background-position:220% 0}}
 
 /* ---------- 4. ambient ---------- */
@@ -488,7 +496,7 @@ html{scroll-behavior:smooth}
 <!-- ══════════ LOADER ══════════ -->
 <div class="loader" id="loader">
   <div class="loader-inner">
-    <img class="loader-mark" src="logo.png" alt="" width="360" height="360">
+    <img class="loader-mark" src="logo.png" alt="SAZ Corporation" width="576" height="487" fetchpriority="high" decoding="async">
     <span class="loader-mono">SAZ CORPORATION</span>
     <div class="loader-bar"><i id="loaderFill"></i></div>
     <span class="loader-pct" id="loaderPct">0</span>
